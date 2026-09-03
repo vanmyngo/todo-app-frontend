@@ -8,7 +8,7 @@
   --primary-button-hover: #C2410C;
   --border: #FDBA74;
   --srikethrough-text: #D6B8A5;
-  --delete-button: #DC2626;
+  --danger: #DC2626;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -40,6 +40,18 @@
     --primary-button-hover: #FDBA74;
     --border: #4A3226;
     --srikethrough-text: #7A6255;
-    --delete-button: #F87171;
+    --danger: #F87171;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
