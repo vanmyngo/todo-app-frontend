@@ -1,14 +1,25 @@
 :root {
-  --primary-text: #7C2D12;
-  --secondary-text: #C2703F;
-  --bg: #FFF7ED;
-  --card-bg: #FFF;
-  --hover: #FED7AA;
-  --primary-button: #FB923C;
-  --primary-button-hover: #C2410C;
-  --border: #FDBA74;
-  --srikethrough-text: #D6B8A5;
-  --danger: #DC2626;
+  /* Brand color */
+  --brand: #E76F51;
+
+  --brand-05: color-mix(in srgb, var(--brand) 5%, white);
+  --brand-10: color-mix(in srgb, var(--brand) 10%, white);
+  --brand-20: color-mix(in srgb, var(--brand) 20%, white);
+  --brand-30: color-mix(in srgb, var(--brand) 30%, white);
+  --brand-50: color-mix(in srgb, var(--brand) 50%, white);
+  --brand-70: color-mix(in srgb, var(--brand) 70%, white);
+  --brand-90: color-mix(in srgb, var(--brand) 90%, white);
+  --brand-100: var(--brand);
+
+  --bg-primary:    #F8F7F4;
+  --bg-card:       #FDFCFB;
+  --bg-input:      #FFFFFF;
+  --bg-surface:    #F1EFEC;
+  --text-primary:  #291800;
+  --text-muted:    #6B7280;
+  --text-subtle:   #9CA3AF;
+  --border:        #E8E4DF;
+  --border-strong: #D1CBC3;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -17,8 +28,8 @@
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text-primary);
+  background: var(--bg-primary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -31,16 +42,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-text: #F5E6D8;
-    --secondary-text: #B99880;
-    --bg: #1C1310;
-    --card-bg: #2A1D18;
-    --hover: #3D2A1F;
-    --primary-button: #FB923C;
-    --primary-button-hover: #FDBA74;
-    --border: #4A3226;
-    --srikethrough-text: #7A6255;
-    --danger: #F87171;
+    --bg-primary:    #141412;
+    --bg-card:       #1C1C1A;
+    --bg-input:      #242422;
+    --bg-surface:    #232320;
+    --text-primary:  #b8b8b8;
+    --text-muted:    #9CA3AF;
+    --text-subtle:   #6B7280;
+    --border:        #2E2E2A;
+    --border-strong: #3A3A36;
   }
 }
 

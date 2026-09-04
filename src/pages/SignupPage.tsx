@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { signUp } from "aws-amplify/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -23,11 +23,13 @@ export default function Signup() {
     };
 
     return (
-        <div>
-            <h1>Signup</h1>
-            <form onSubmit={handleSignup}>
-                <p className="error-message">{error}</p>
-                <div>
+        <div className="auth-card">
+            <div className="auth-title">
+                <h1>Signup</h1>
+                <p className="subtle-text">Ready to join?</p>
+            </div>
+            <form onSubmit={handleSignup} className="auth-form">
+                <div className="auth-input">
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -37,7 +39,7 @@ export default function Signup() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="auth-input">
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -47,10 +49,16 @@ export default function Signup() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
+                
+                {error && <p className="error-message">{error}</p>}
+
                 <button type="submit">
-                    {loading ? "Signing up..." : "Sign Up"}
+                    {loading ? "Signing up..." : "Sign up"}
                 </button>
             </form>
+            <div className="auth-footer">
+                No account? <Link to="/login">Log in</Link>
+            </div>
         </div>
     );
 }
