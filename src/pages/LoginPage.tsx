@@ -31,7 +31,7 @@ export default function Login() {
             </div>
             <form onSubmit={handleLogin} className="auth-form">
                 <div className="auth-input">
-                    <label htmlFor="email">Email</label>
+                    <label className="muted-text" htmlFor="email">Email</label>
                     <input
                         type="email"
                         id="email"
@@ -40,7 +40,7 @@ export default function Login() {
                     />
                 </div>
                 <div className="auth-input">
-                    <label htmlFor="password">Password</label>
+                    <label className="muted-text" htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
@@ -56,7 +56,8 @@ export default function Login() {
                 </button>
             </form>
             <div className="auth-footer">
-                Already have an account? <Link to="/signup">Sign up</Link>
+                Already have an account?
+                <Link to="/signup">Sign up</Link>
             </div>
         </div>
     );

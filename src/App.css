@@ -2,10 +2,6 @@ h1, h2, h3 {
   color: var(--text-primary);
 }
 
-label {
-  color: var(--text-muted);
-}
-
 input {
   background-color: var(--bg-input);
   border-radius: 10%;
@@ -33,6 +29,7 @@ button {
 }
 
 .subtle-text { color: var(--text-subtle); }
+.muted-text { color: var(--text-muted); }
 
 .error-message {
   color: var(--danger);
@@ -63,6 +60,9 @@ button {
   margin-top: 0.2rem;
   font-size: 0.8rem;
   color: var(--text-subtle);
+  display: flex;
+  justify-content: center;
+  gap: 0.1rem;
 }
 
 .auth-footer a {

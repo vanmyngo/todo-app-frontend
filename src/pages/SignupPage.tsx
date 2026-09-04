@@ -30,7 +30,7 @@ export default function Signup() {
             </div>
             <form onSubmit={handleSignup} className="auth-form">
                 <div className="auth-input">
-                    <label htmlFor="email">Email</label>
+                    <label className="muted-text" htmlFor="email">Email</label>
                     <input
                         type="email"
                         id="email"
@@ -40,7 +40,7 @@ export default function Signup() {
                     />
                 </div>
                 <div className="auth-input">
-                    <label htmlFor="password">Password</label>
+                    <label className="muted-text" htmlFor="password">Password</label>
                     <input
                         type="password"
                         id="password"
@@ -57,7 +57,8 @@ export default function Signup() {
                 </button>
             </form>
             <div className="auth-footer">
-                No account? <Link to="/login">Log in</Link>
+                No account? 
+                <Link to="/login">Log in</Link>
             </div>
         </div>
     );
