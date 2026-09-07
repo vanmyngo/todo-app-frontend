@@ -20,6 +20,7 @@
   --text-subtle:   #9CA3AF;
   --border:        #E8E4DF;
   --border-strong: #D1CBC3;
+  --alert: #C44536;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -51,17 +52,6 @@
     --text-subtle:   #6B7280;
     --border:        #2E2E2A;
     --border-strong: #3A3A36;
+    --danger: #F06A5F;
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
 }
