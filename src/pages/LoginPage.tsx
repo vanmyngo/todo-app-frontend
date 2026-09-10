@@ -1,26 +1,33 @@
 import { useState } from "react";
 import { signIn } from "@aws-amplify/auth";
 import { useNavigate, Link } from "react-router-dom";
+import { errorMessages, nextStepMessages } from "../utils/authMessages";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-
+    const navigate = useNavigate();
 
     async function handleLogin(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         setLoading(true);
         setError("");
-        const user = await signIn({ username: email, password });
-        if (!user) {
-            setError("Invalid email or password");
-        } else {
-            const navigate = useNavigate();
-            navigate("/todos");
+
+        try {
+            const result = await signIn({ username: email, password, options: { authFlowType: "USER_SRP_AUTH" } });
+            if (result.isSignedIn) {
+                navigate("/todos");
+                return;
+            }
+            setError(nextStepMessages[result.nextStep.signInStep] ?? "Additional confirmation is required.");
+        } catch (err: unknown) {
+            const errorName = err instanceof Error ? err.name : "";
+            setError(errorMessages[errorName] ?? "Unable to log in. Please try again.");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     return (

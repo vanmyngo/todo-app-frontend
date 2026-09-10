@@ -7,19 +7,21 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     async function handleSignup(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         setLoading(true);
         setError("");
-        const output = await signUp({ username: email, password });
-        if (!output.isSignUpComplete) {
-            setError("Signup failed. Please try again.");
-        } else {
-            const navigate = useNavigate();
+        try {
+            await signUp({ username: email, password });
             navigate("/confirm-signup");
+        } catch (err) {
+            console.error("[src/pages/SignupPage.tsx] Failed: " + err);
+            setError("Failed to sign up.");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -37,6 +39,7 @@ export default function Signup() {
                         aria-label="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="email"
                     />
                 </div>
                 <div className="auth-input">
@@ -47,6 +50,7 @@ export default function Signup() {
                         aria-label="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="password"
                     />
                 </div>
                 
