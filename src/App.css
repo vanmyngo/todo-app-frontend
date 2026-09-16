@@ -2,35 +2,10 @@ h1, h2, h3 {
   color: var(--text-primary);
 }
 
-input {
-  background-color: var(--bg-input);
-  border-radius: 10%;
-  border: none;
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.5rem;
-  margin: 0.2rem 0.2rem 0;
-  color: var(--text-muted);
-
-  &:focus{
-    outline: 2px solid var(--brand-70);
-  }
-}
-
-button {
-  background-color: var(--brand-90);
-  border: none;
-  padding: 0.5rem 0;
-  border-radius: 0.5rem;
-  margin: 0.2rem;
-
-  &:hover {
-    background-color: var(--brand-100);
-  }
-}
-
 .subtle-text { color: var(--text-subtle); }
 .muted-text { color: var(--text-muted); }
 
+/* #region Auth page */
 .error-message {
   color: var(--danger);
   font-size: 0.8rem;
@@ -43,6 +18,32 @@ button {
   padding: 1.5rem;
   margin: 20vh auto;
   width: 350px;
+}
+
+.auth-card input {
+  background-color: var(--bg-input);
+  border-radius: 10%;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  border-radius: var(--rounded-lg);
+  margin: 0.2rem 0.2rem 0;
+  color: var(--text-muted);
+
+  &:focus{
+    outline: 2px solid var(--brand-70);
+  }
+}
+
+.auth-card button {
+  background-color: var(--brand-90);
+  border: none;
+  padding: 0.5rem 0;
+  border-radius: var(--rounded-lg);
+  margin: 0.2rem;
+
+  &:hover {
+    background-color: var(--brand-100);
+  }
 }
 
 .auth-title {
@@ -80,3 +81,101 @@ button {
   flex-direction: column;
   justify-content: space-around;
 }
+/* #endregion */
+
+/* #region Todos page */
+.todo-grid-container {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "todo-list add-todo"
+    "todo-list streak-tracker"
+    "todo-list streak-tracker"
+    "todo-list progress-tracker" 
+    "todo-list progress-tracker" 
+    "todo-list progress-tracker";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 2rem;
+  padding: 1rem;
+  margin: 2rem auto;
+  border-radius: var(--rounded-lg);
+}
+
+.grid-container h1 {
+  grid: title;
+}
+
+#todo-list {
+  grid-area: todo-list;
+  border-radius: var(--rounded-lg);
+  background-color: var(--bg-card);
+  padding: 0 1rem;
+}
+
+/* .todo-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+} */
+
+.todo-tasks {
+  flex: 1;
+  margin: 1rem 0;
+  position: relative;
+  text-align: center;
+}
+
+.todo-tasks::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: -0.2rem;
+  height: 1px;
+  background-color: var(--text-subtle);
+}
+
+.todo-item {
+  display: flex;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.todo-item button {
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--danger);
+  }
+}
+
+.todo-item input[type="checkbox"] {
+
+  &:hover {
+    accent-color: var(--brand-90);
+  }
+}
+
+#add-todo-form {
+  grid-area: add-todo;
+  border-radius: var(--rounded-3xl);
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+#streak-tracker-container {
+  grid-area: streak-tracker;
+  border-radius: var(--rounded-lg);
+  background-color: var(--bg-card);
+}
+
+#progress-tracker-container {
+  grid-area: progress-tracker;
+  border-radius: var(--rounded-lg);
+  background-color: var(--bg-card);
+}
+/* #endregion */
