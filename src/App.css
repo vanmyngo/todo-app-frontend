@@ -113,12 +113,6 @@ h1, h2, h3 {
   padding: 0 1rem;
 }
 
-/* .todo-actions {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-} */
-
 .todo-tasks {
   flex: 1;
   margin: 1rem 0;
@@ -165,6 +159,10 @@ h1, h2, h3 {
   grid-template-columns: 3fr 1fr;
   gap: 1rem;
   padding: 1rem 0;
+}
+
+#add-todo-form input {
+  padding: 0 0.5rem;
 }
 
 #streak-tracker-container {
