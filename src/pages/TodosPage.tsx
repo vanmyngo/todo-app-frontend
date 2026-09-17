@@ -46,11 +46,12 @@ export default function TodosPage() {
     fetchTodos();
   }, []);
 
+  // Handler for toggling todo status
   async function handleToggleTodoStatus(todo: Todo) {
     // Toggle current todo status
     const completed = !todo.completed;
 
-    // Checkbox toggle on UI
+    // Checkbox toggle on frontend
     setTodos((currentTodos) =>
       currentTodos.map((currentTodo) =>
         currentTodo.taskId === todo.taskId 
@@ -59,9 +60,11 @@ export default function TodosPage() {
       ) 
     );
 
+    // Retrieve auth token
     const { tokens } = await fetchAuthSession();
     const idToken = tokens?.idToken?.toString().trim();
 
+    // Update task completed field on backend
     const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${todo.taskId}`,
       {
         method: "PUT",
@@ -73,7 +76,7 @@ export default function TodosPage() {
       }
     );
 
-    // Rollback if fetch request fails
+    // Rollback
     if (!response.ok) {
       setTodos((currentTodos) => currentTodos.map((currentTodo) =>
         currentTodo.taskId === todo.taskId
@@ -84,11 +87,44 @@ export default function TodosPage() {
     }
   };
 
+  // Handler for deleting todo
+  async function handleDeleteTodo(todo: Todo) {
+    // Remove selected todo from frontend
+    setTodos((currentTodos) => 
+      currentTodos.filter((currentTodo) => currentTodo.taskId !== todo.taskId));
+
+    // Retrieve auth token
+    const { tokens } = await fetchAuthSession();
+    const idToken = tokens?.idToken?.toString().trim();
+    
+    // Remove selected todo from backend
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${todo.taskId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+      }
+    );
+
+    // Rollback
+    if (!response.ok) {
+      setTodos((currentTodos) => [...currentTodos, todo]);
+    }
+  }
+
   return (
     <div className="todo-grid-container">
       <h1 className="muted-text">Daily Tasks</h1>
       <AddTodoForm />
-      {todos && <TodoList todos={todos} onToggle={handleToggleTodoStatus} />}
+      {todos && 
+        <TodoList 
+          todos={todos} 
+          onToggle={handleToggleTodoStatus} 
+          onDelete={handleDeleteTodo}
+        />
+      }
       <StreakCounter />
       <ProgressTracker />
     </div>
