@@ -114,10 +114,40 @@ export default function TodosPage() {
     }
   }
 
+  // Handler for adding todo
+  async function handleAddTodo(task: String) {
+    // Retrieve auth token
+    const { tokens } = await fetchAuthSession();
+    const idToken = tokens?.idToken?.toString().trim();
+    if (!idToken) {
+      console.error("[AddTodoForm.tsx] No ID token available.");
+      return;
+    }
+
+    // Add new todo to backend
+    const response = await fetch(import.meta.env.VITE_API_URL + "/todos", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify({ task }),
+    });
+
+    if (!response.ok) {
+        console.error("[AddTodoForm.tsx] Failed to add todo.");
+        return;
+    }
+
+    // Add todo to list
+    const newTodo: Todo = await response.json();
+    setTodos((currentTodos) => [...currentTodos, newTodo]);
+  }
+
   return (
     <div className="todo-grid-container">
       <h1 className="muted-text">Daily Tasks</h1>
-      <AddTodoForm />
+      <AddTodoForm onAddTodo={handleAddTodo}/>
       {todos && 
         <TodoList 
           todos={todos} 
@@ -126,7 +156,7 @@ export default function TodosPage() {
         />
       }
       <StreakCounter />
-      <ProgressTracker />
+      <ProgressTracker todos={todos} />
     </div>
   );
 };
