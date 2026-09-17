@@ -152,6 +152,10 @@ h1, h2, h3 {
   }
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 #add-todo-form {
   grid-area: add-todo;
   border-radius: var(--rounded-3xl);
