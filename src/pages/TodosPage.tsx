@@ -115,7 +115,7 @@ export default function TodosPage() {
   }
 
   // Handler for adding todo
-  async function handleAddTodo(task: String) {
+  async function handleAddTodo(task: string) {
     // Retrieve auth token
     const { tokens } = await fetchAuthSession();
     const idToken = tokens?.idToken?.toString().trim();
