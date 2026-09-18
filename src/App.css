@@ -89,10 +89,7 @@ h1, h2, h3 {
   grid-template-areas:
     "title title"
     "todo-list add-todo"
-    "todo-list streak-tracker"
-    "todo-list streak-tracker"
-    "todo-list progress-tracker" 
-    "todo-list progress-tracker" 
+    "todo-list calendar"
     "todo-list progress-tracker";
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
@@ -169,10 +166,31 @@ h1, h2, h3 {
   padding: 0 0.5rem;
 }
 
-#streak-tracker-container {
-  grid-area: streak-tracker;
-  border-radius: var(--rounded-lg);
+.react-calendar {
+  grid-area: calendar;
   background-color: var(--bg-card);
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-primary);
+  border-radius: var(--rounded-lg);
+}
+
+.react-calendar__tile, .react-calendar__navigation button {
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: none;
+}
+
+.react-calendar__tile--now {
+  background-color: var(--brand-70);
+  color: var(--bg-card);
+  border-radius: var(--rounded-3xl);
 }
 
 #progress-tracker-container {

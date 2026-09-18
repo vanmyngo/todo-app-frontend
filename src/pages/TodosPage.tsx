@@ -4,7 +4,7 @@ import { TodoList } from "../components/TodoList";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { AddTodoForm } from "../components/AddTodoForm";
 import { useNavigate } from "react-router-dom";
-import { StreakCounter } from "../components/StreakCounter";
+import { Calendar } from "../components/Calendar";
 import { ProgressTracker } from "../components/ProgressTracker";
 
 export default function TodosPage() {  
@@ -155,7 +155,7 @@ export default function TodosPage() {
           onDelete={handleDeleteTodo}
         />
       }
-      <StreakCounter />
+      <Calendar />
       <ProgressTracker todos={todos} />
     </div>
   );
