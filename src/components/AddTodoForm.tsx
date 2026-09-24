@@ -1,4 +1,4 @@
-export const AddTodoForm = ({ onAddTodo }: { onAddTodo: (task: String) => void}) => {
+export const AddTodoForm = ({ onAddTodo }: { onAddTodo: (task: string) => void }) => {
     // Handler to retrieve task
     async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
