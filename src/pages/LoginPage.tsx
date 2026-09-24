@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { signIn } from "@aws-amplify/auth";
+import { useEffect, useState } from "react";
+import { getCurrentUser, signIn } from "@aws-amplify/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { errorMessages, nextStepMessages } from "../utils/authMessages";
 
@@ -8,8 +8,23 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [checking, setChecking] = useState(true);
     const navigate = useNavigate();
 
+    // Redirect user to main page if already logged in
+    useEffect(() => {
+        getCurrentUser()
+            .then(() => navigate("/todos"))
+            .catch(() => setChecking(false));
+    }, [navigate])
+
+    /**
+     * Attempts to sign in the user and routes completed sign-ins to the todo page.
+     * Incomplete authentication steps and known sign-in errors are shown in the form.
+     *
+     * @param event Form submission event.
+     * @returns A promise that resolves when sign-in handling is complete.
+     */
     async function handleLogin(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
         setLoading(true);
@@ -28,6 +43,15 @@ export default function Login() {
         } finally {
             setLoading(false);
         }
+    }
+
+    // Show loading screen while auth is check
+    if (checking) {
+        return (
+            <div className="auth-card">
+                <p>Loading...</p>
+            </div>
+        );
     }
 
     return (
