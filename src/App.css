@@ -1,9 +1,71 @@
+body {
+  margin: 0;
+}
+
 h1, h2, h3 {
   color: var(--text-primary);
 }
 
 .subtle-text { color: var(--text-subtle); }
 .muted-text { color: var(--text-muted); }
+
+/* #region Navigation bar */
+.navigation-bar {
+  background-color: var(--bg-card);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.navigation-menu {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--text-subtle);
+}
+
+.navigation-menu a {
+  text-decoration: none;
+  padding: 0.5rem;
+  border: 0.5px solid transparent;
+  border-radius: var(--rounded-lg);
+  color: inherit;
+
+  &:hover {
+    border-color: var(--brand-100);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: var(--brand-90);
+    color: var(--bg-card);
+  }
+}
+
+.navigation-menu button {
+  padding: 0.5rem;
+  border: 0.5px solid transparent;
+  background-color: transparent;
+  border-radius: var(--rounded-lg);
+  color: inherit;
+
+  &:hover {
+    border-color: var(--brand-100);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: var(--brand-90);
+    color: var(--bg-card);
+  }
+}
+
+.brand-logo {
+  width: 2rem;
+  height: auto;
+}
+/* #endregion */
 
 /* #region Auth page */
 .error-message {

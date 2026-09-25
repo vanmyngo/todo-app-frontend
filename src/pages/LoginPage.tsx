@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { getCurrentUser, signIn } from "@aws-amplify/auth";
+import { signIn } from "@aws-amplify/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { errorMessages, nextStepMessages } from "../utils/authMessages";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Login() {
+    // Store form values, status, and any login error.
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [checking, setChecking] = useState(true);
+    const { isSignedIn, checking } = useAuth();
     const navigate = useNavigate();
 
-    // Redirect user to main page if already logged in
+    // Send already signed-in users to the todo page.
     useEffect(() => {
-        getCurrentUser()
-            .then(() => navigate("/todos"))
-            .catch(() => setChecking(false));
-    }, [navigate])
+        if (!checking && isSignedIn) navigate("/todos");
+    }, [checking, isSignedIn, navigate]);
 
     /**
      * Attempts to sign in the user and routes completed sign-ins to the todo page.
@@ -26,6 +26,7 @@ export default function Login() {
      * @returns A promise that resolves when sign-in handling is complete.
      */
     async function handleLogin(event: React.SubmitEvent<HTMLFormElement>) {
+        // Submit credentials and handle completed or additional sign-in steps.
         event.preventDefault();
         setLoading(true);
         setError("");
@@ -45,7 +46,7 @@ export default function Login() {
         }
     }
 
-    // Show loading screen while auth is check
+    // Show a loading screen while the session is being checked.
     if (checking) {
         return (
             <div className="auth-card">
@@ -54,6 +55,7 @@ export default function Login() {
         );
     }
 
+    // Render the login form after the session check completes.
     return (
         <div className="auth-card">
             <div className="auth-title">

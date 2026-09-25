@@ -1,5 +1,5 @@
 :root {
-  --brand: #E76F51;
+  --brand: #3B82A0;
   --brand-05: color-mix(in srgb, var(--brand) 5%, white);
   --brand-10: color-mix(in srgb, var(--brand) 10%, white);
   --brand-20: color-mix(in srgb, var(--brand) 20%, white);
