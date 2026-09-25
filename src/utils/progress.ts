@@ -1,4 +1,4 @@
-import type { Todo } from '../components/types';
+import type { Todo } from './types';
 
 /**
  * Get completed tasks progress.
