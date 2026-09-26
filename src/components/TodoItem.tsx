@@ -1,5 +1,5 @@
 import { TbTrash } from "react-icons/tb";
-import type { Todo } from "./types";
+import type { Todo } from "../utils/types";
 
 export const TodoItem = ({ 
     todo, 

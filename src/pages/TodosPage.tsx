@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Todo } from "../components/types";
+import type { Todo } from "../utils/types";
 import { TodoList } from "../components/TodoList";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { AddTodoForm } from "../components/AddTodoForm";

@@ -1,5 +1,5 @@
 import { getOverallProgress } from "../utils/progress";
-import type { Todo } from "./types";
+import type { Todo } from "../utils/types";
 
 export function ProgressTracker({ todos }:{ todos: Todo[] }) {
     const progress = getOverallProgress({todos});

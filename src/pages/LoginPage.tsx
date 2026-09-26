@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { signIn } from "@aws-amplify/auth";
 import { useNavigate, Link } from "react-router-dom";
-import { errorMessages, nextStepMessages } from "../utils/authMessages";
+import { errorMessages, nextStepMessages } from "../auth/authMessages";
 import { useAuth } from "../auth/AuthContext";
 
 export default function Login() {
