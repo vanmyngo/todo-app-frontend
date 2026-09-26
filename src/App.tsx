@@ -3,7 +3,6 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import TodosPage from "./pages/TodosPage";
 import ConfirmSignupPage from "./pages/ConfirmSignupPage";
-import WelcomePage from "./pages/WelcomePage";
 import { NavigationBar } from "./components/NavigationBar";
 import { AuthProvider } from "./auth/AuthContext";
 
@@ -14,7 +13,7 @@ export default function App() {
       <AuthProvider>
         <NavigationBar />
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
+          <Route path="/" element={<TodosPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/todos" element={<TodosPage />} />

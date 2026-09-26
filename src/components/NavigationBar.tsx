@@ -8,10 +8,10 @@ export function NavigationBar() {
     const { isSignedIn, checking } = useAuth();
     const navigate = useNavigate();
 
-    // Sign out and return to the welcome page.
+    // Sign out and return to the login page.
     async function handleLogout() {
         await signOut();
-        navigate("/");
+        navigate("/login");
     }
 
     // Hide the navbar until the initial auth check finishes.
