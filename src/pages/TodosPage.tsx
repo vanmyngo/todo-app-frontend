@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Todo } from "../utils/types";
 import { TodoList } from "../components/TodoList";
+import { TodayDate } from "../components/TodayDate.tsx";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { AddTodoForm } from "../components/AddTodoForm";
 import { useNavigate } from "react-router-dom";
-import { Calendar } from "../components/Calendar";
 import { ProgressTracker } from "../components/ProgressTracker";
 
 export default function TodosPage() {  
@@ -146,17 +146,23 @@ export default function TodosPage() {
 
   return (
     <div className="todo-grid-container">
-      <h1 className="muted-text">Daily Tasks</h1>
-      <AddTodoForm onAddTodo={handleAddTodo}/>
-      {todos && 
-        <TodoList 
-          todos={todos} 
-          onToggle={handleToggleTodoStatus} 
-          onDelete={handleDeleteTodo}
-        />
-      }
-      <Calendar />
-      <ProgressTracker todos={todos} />
+      <header className="todo-page-header">
+        <h1 className="muted-text">Daily Tasks</h1>
+        <div className="todo-header-summary">
+          <TodayDate />
+          <ProgressTracker todos={todos} />
+        </div>
+      </header>
+      <main className="todo-task-column">
+        <AddTodoForm onAddTodo={handleAddTodo} />
+        {todos && 
+          <TodoList 
+            todos={todos} 
+            onToggle={handleToggleTodoStatus} 
+            onDelete={handleDeleteTodo}
+          />
+        }
+      </main>
     </div>
   );
 };
