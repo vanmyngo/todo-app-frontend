@@ -30,12 +30,18 @@ Prod URL: https://d3983hh5nndqkk.cloudfront.net
 - Due dates and priority levels
  
 ## Deploy
-S3 and CloudFront as already been setup. <br/>
-To update new changes to S3
+S3 and CloudFront as already been setup.
+### To update new changes to S3
 1. Rebuild REACT app
 ```
 cd <project-root>
 npm run build
 ```
-2. Upload dist folder's contents to S3
-
+2. Navigate to AWS console and search for S3 Buckets
+3. Click todo-app-frontend bucket
+4. Upload dist folder's contents to S3
+5. Navigate to AWS console and search for Cloudfront
+6. Click todo-app-frontend distribution
+7. Click Invalidations tab
+8. Select a previous invalidation and click Copy to New
+9. Wait for invalidation to finish then verify changes are deployed to prod
