@@ -1,7 +1,8 @@
 # Todo App
  
 A simple CRUD to-do app built on AWS, using only always-free tier services.<br/>
-Prod URL: https://d3983hh5nndqkk.cloudfront.net
+Prod URL: https://d3983hh5nndqkk.cloudfront.net<br/>
+Backend Repo: https://github.com/vanmyngo/todo-app-backend
  
 ## Tech Stack
  
