@@ -5,10 +5,12 @@ export const TodoList = ({
     todos, 
     onToggle,
     onDelete,
+    onEdit,
 }: { 
     todos: Todo[]; 
     onToggle: (todo: Todo) => void; 
     onDelete: (todo: Todo) => void;
+    onEdit: (todo: Todo, newTask: string) => Promise<void>;
 }) => {
     return (
         <div id="todo-list">
@@ -18,6 +20,7 @@ export const TodoList = ({
                     todo={todo} 
                     onToggle={onToggle}
                     onDelete={onDelete}
+                    onEdit={onEdit}
                 />
             ))}
         </div>

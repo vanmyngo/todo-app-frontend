@@ -144,6 +144,41 @@ export default function TodosPage() {
     setTodos((currentTodos) => [...currentTodos, newTodo]);
   }
 
+  // Handler for editing todo
+  async function handleEditTodo(todo: Todo, newTask: string) {
+    // Retrieve auth token
+    const { tokens } = await fetchAuthSession();
+    const idToken = tokens?.idToken?.toString().trim();
+    if (!idToken) return;
+
+    // Send the updated task to the API.
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${todo.taskId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ task: newTask }),
+      }
+    );
+
+    // Pass API errors back to the editor.
+    if (!response.ok) {
+      const data = await response.json().catch(() => null);
+      throw new Error(data?.message ?? data?.error ?? "Could not update the task.");
+    }
+
+    // Update the local list after the API confirms the edit.
+    setTodos((currentTodos) => 
+      currentTodos.map((currentTodo) => 
+        currentTodo.taskId === todo.taskId 
+          ? {...currentTodo, task: newTask} 
+          : currentTodo
+      )
+    );
+  }
+
   return (
     <div className="todo-grid-container">
       <header className="todo-page-header">
@@ -160,6 +195,7 @@ export default function TodosPage() {
             todos={todos} 
             onToggle={handleToggleTodoStatus} 
             onDelete={handleDeleteTodo}
+            onEdit={handleEditTodo}
           />
         }
       </main>
