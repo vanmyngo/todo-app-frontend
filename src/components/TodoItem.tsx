@@ -1,6 +1,6 @@
 import { TbDeviceFloppy, TbEdit, TbTrash } from "react-icons/tb";
 import type { Todo } from "../utils/types";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /** Renders a todo and its controls. */
 export const TodoItem = ({ 
@@ -18,6 +18,12 @@ export const TodoItem = ({
     const [isEditing, setIsEditing] = useState(false);
     const [task, setTask] = useState(todo.task);
     const [error, setError] = useState("");
+    const taskInputRef = useRef<HTMLInputElement>(null);
+
+    /** Focus on task input on edit. */
+    useEffect(() => {
+        if (isEditing) taskInputRef.current?.focus();
+    }, [isEditing]);
 
     /** Cancels edits and toggles completion. */
     function handleToggle() {
@@ -92,11 +98,11 @@ export const TodoItem = ({
                         </button> 
                     }
                     <input 
+                        ref={taskInputRef}
                         className={`todo-tasks ${todo.completed ? "completed" : ""}`}
                         value={task} 
                         disabled={!isEditing} 
                         onChange={(event) => setTask(event.target.value)}
-                        autoFocus={isEditing}
                     />
                 </form>
             </div>
