@@ -139,9 +139,9 @@ export default function TodosPage() {
         return;
     }
 
-    // Add todo to list
+    // Add todo at top of list
     const newTodo: Todo = await response.json();
-    setTodos((currentTodos) => [...currentTodos, newTodo]);
+    setTodos((currentTodos) => [newTodo, ...currentTodos]);
   }
 
   // Handler for editing todo
