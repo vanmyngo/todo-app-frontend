@@ -7,6 +7,7 @@ import { AddTodoForm } from "../components/AddTodoForm";
 import { useNavigate } from "react-router-dom";
 import { ProgressTracker } from "../components/ProgressTracker";
 import { Dropdown } from "../components/FilterDropdown.tsx";
+import { getCutoffDate } from "../utils/datetime.ts";
 
 export default function TodosPage() {  
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -174,15 +175,18 @@ export default function TodosPage() {
   }
 
   // Filter todos based on status and completed date
-  const cuttoffTime = Date.now() - Number(completedWithin) * 24 * 60 * 60 * 1000;
+  const createdCutoffDate = getCutoffDate(Number(createdWithin));
+  const completedCutoffDate = getCutoffDate(Number(completedWithin));
   const filteredTodos = todos.filter((todo) => {
     const matchesStatus = statusFilter === "all" 
       || (statusFilter === "active" && !todo.completed) 
       || (statusFilter === "completed" && todo.completed);
     const matchesDate = !todo.completed 
       || (completedWithin === "all")
-      || (todo.completedDate && new Date(todo.completedDate).getTime() >= cuttoffTime);
-    return matchesStatus && matchesDate;
+      || (todo.completedDate && new Date(todo.completedDate).getTime() >= completedCutoffDate.getTime());
+    const matchesCreatedDate = createdWithin === "all" 
+    || (todo.createdAt && new Date(todo.createdAt).getTime() >= createdCutoffDate.getTime());
+    return matchesStatus && matchesDate && matchesCreatedDate;
   });
 
   return (
@@ -202,22 +206,18 @@ export default function TodosPage() {
             options={STATUS_OPTIONS}
             onChange={setStatusFilter}
           />
-          {statusFilter === "completed" &&
-            <Dropdown
-              label="Completed within"
-              value={completedWithin}
-              options={DAYS_OPTIONS}
-              onChange={setCompletedWithin}
-            />
-          }
-          {statusFilter === "active" &&
-            <Dropdown
-              label="Created within"
-              value={createdWithin}
-              options={DAYS_OPTIONS}
-              onChange={setCreatedWithin}
-            />
-          }
+          <Dropdown
+            label="Created within"
+            value={createdWithin}
+            options={DAYS_OPTIONS}
+            onChange={setCreatedWithin}
+          />
+          <Dropdown
+            label="Completed within"
+            value={completedWithin}
+            options={DAYS_OPTIONS}
+            onChange={setCompletedWithin}
+          />
         </div>
         <AddTodoForm onAddTodo={handleAddTodo} />
         {filteredTodos && 

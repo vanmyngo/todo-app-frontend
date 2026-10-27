@@ -8,7 +8,7 @@ export const TodoList = ({
     onEdit,
 }: { 
     todos: Todo[]; 
-    onToggle: (todo: Todo) => void; 
+    onToggle: (todo: Todo) => Promise<void>; 
     onDelete: (todo: Todo) => void;
     onEdit: (todo: Todo, newTask: string) => Promise<void>;
 }) => {

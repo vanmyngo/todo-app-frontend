@@ -238,15 +238,25 @@ h1, h2, h3 {
   background-color: transparent;
   border: none;
 
-  &:hover {
+  &:not(:disabled):hover {
     color: var(--danger);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
 .todo-item input[type="checkbox"] {
 
-  &:hover {
+  &:not(:disabled):hover {
     accent-color: var(--brand-90);
+  }
+
+  &:disabled {
+    accent-color: var(--text-muted);
+    cursor: not-allowed;
   }
 }
 
