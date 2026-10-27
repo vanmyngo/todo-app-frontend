@@ -254,6 +254,32 @@ h1, h2, h3 {
   text-decoration: line-through;
 }
 
+.task-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.todo-filter-dropdown-label {
+  color: var(--text-subtle);
+  font-size: 0.7rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.todo-filter-dropdown {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--rounded-md);
+  color: var(--text-muted);
+  padding: 0.25rem;
+
+  &:hover {
+    border-color: var(--brand-100);
+  }
+}
+
 #add-todo-form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
