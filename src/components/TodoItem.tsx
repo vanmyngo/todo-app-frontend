@@ -26,17 +26,10 @@ export const TodoItem = ({
         if (isEditing) taskInputRef.current?.focus();
     }, [isEditing]);
 
-    /** Cancels edits and toggles completion. */
+    /** Toggles the completion status of the todo. */
     async function handleToggle() {
         // Prevent toggling while an update is in progress.
         if (isUpdating) return;
-
-        // Reset the draft when leaving edit mode.
-        if (isEditing) {
-            setTask(todo.task);
-            setIsEditing(false);
-            setError("");
-        }
 
         // Call the parent handler to toggle completion.
         setIsUpdating(true);
@@ -77,34 +70,36 @@ export const TodoItem = ({
     return (
         <div className="todo-item">
             <div className="todo-item-display">
-                <input 
-                    type="checkbox" 
-                    title={todo.completed ? "Mark incomplete" : "Mark complete"}
-                    checked={todo.completed} 
-                    onChange={handleToggle}
-                    disabled={isUpdating}
-                />
-                {!todo.completed && (
-                    <button 
-                        type="button"
-                        title="Delete" 
-                        aria-label="Delete todo item" 
-                        onClick={() => onDelete(todo)}
+                {!isEditing &&
+                    <input 
+                        type="checkbox" 
+                        title={todo.completed ? "Mark incomplete" : "Mark complete"}
+                        checked={todo.completed} 
+                        onChange={handleToggle}
                         disabled={isUpdating}
-                    >
-                        <TbTrash />
-                    </button>
-                )}
+                    />
+                }
                 {!isEditing && !todo.completed && 
-                    <button 
-                        type="button" 
-                        title="Edit"
-                        aria-label="Edit todo item" 
-                        onClick={() => setIsEditing(true)}
-                        disabled={isUpdating}
-                    >
-                        <TbEdit />
-                    </button>
+                    <>
+                        <button 
+                            type="button"
+                            title="Delete" 
+                            aria-label="Delete todo item" 
+                            onClick={() => onDelete(todo)}
+                            disabled={isUpdating}
+                        >
+                            <TbTrash />
+                        </button>
+                        <button 
+                            type="button" 
+                            title="Edit"
+                            aria-label="Edit todo item" 
+                            onClick={() => setIsEditing(true)}
+                            disabled={isUpdating}
+                        >
+                            <TbEdit />
+                        </button>
+                    </>
                 }
 
                 <form onSubmit={handleSubmit}>
