@@ -13,6 +13,7 @@ export default function TodosPage() {
   const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState("all");
   const [completedWithin, setCompletedWithin] = useState("7");
+  const [createdWithin, setCreatedWithin] = useState("7");
   
   useEffect(() => {
     async function fetchTodos() {
@@ -207,6 +208,14 @@ export default function TodosPage() {
               value={completedWithin}
               options={DAYS_OPTIONS}
               onChange={setCompletedWithin}
+            />
+          }
+          {statusFilter === "active" &&
+            <Dropdown
+              label="Created within"
+              value={createdWithin}
+              options={DAYS_OPTIONS}
+              onChange={setCreatedWithin}
             />
           }
         </div>
