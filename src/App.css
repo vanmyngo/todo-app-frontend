@@ -38,8 +38,8 @@ h1, h2, h3 {
   }
 
   &:active {
-    background-color: var(--brand-90);
-    color: var(--bg-card);
+    color: var(--brand-70);
+    cursor: pointer;
   }
 }
 
@@ -50,14 +50,14 @@ h1, h2, h3 {
   border-radius: var(--rounded-lg);
   color: inherit;
 
-  &:hover {
+  &:hover{
     color: var(--brand-100);
     cursor: pointer;
   }
 
   &:active {
-    background-color: var(--brand-90);
-    color: var(--bg-card);
+    color: var(--brand-70);
+    cursor: pointer;
   }
 }
 
