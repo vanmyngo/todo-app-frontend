@@ -33,7 +33,7 @@ h1, h2, h3 {
   color: inherit;
 
   &:hover {
-    border-color: var(--brand-100);
+    color: var(--brand-100);
     cursor: pointer;
   }
 
@@ -51,7 +51,7 @@ h1, h2, h3 {
   color: inherit;
 
   &:hover {
-    border-color: var(--brand-100);
+    color: var(--brand-100);
     cursor: pointer;
   }
 
@@ -204,9 +204,8 @@ h1, h2, h3 {
   box-sizing: border-box;
   text-align: center;
   background-color: inherit;
-  border: 0;
-  border-bottom: 1px solid var(--text-subtle);
-
+  border: none;
+  
   &:focus {
     outline: none;
   }
@@ -225,6 +224,8 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--text-subtle);
 }
 
 .todo-item-display form {
@@ -237,21 +238,63 @@ h1, h2, h3 {
 .todo-item button {
   background-color: transparent;
   border: none;
+  color: var(--text-muted);
+  padding-top: 0.25rem;
+  margin-right: -0.25rem;
+  &:not(:disabled):hover {
+    color: var(--brand-70);
+    cursor: pointer;
+  }
 
-  &:hover {
-    color: var(--danger);
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
 .todo-item input[type="checkbox"] {
+  accent-color: var(--brand-100);
+  margin-right: 0.10rem;
 
-  &:hover {
-    accent-color: var(--brand-90);
+  &:not(:disabled):hover {
+    accent-color: var(--brand-70);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    accent-color: var(--text-muted);
+    cursor: not-allowed;
   }
 }
 
 .completed {
   text-decoration: line-through;
+}
+
+.task-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.todo-filter-dropdown-label {
+  color: var(--text-subtle);
+  font-size: 0.7rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.todo-filter-dropdown {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--rounded-md);
+  color: var(--text-muted);
+  padding: 0.25rem;
+
+  &:hover {
+    border-color: var(--brand-100);
+  }
 }
 
 #add-todo-form {
@@ -269,16 +312,24 @@ h1, h2, h3 {
   border-radius: var(--rounded-md);
   background-color: var(--bg-input);
   color: var(--text-primary);
+
+  &:hover {
+    border-color: var(--brand-100);
+  }
 }
 
 #add-todo-form button {
   min-width: 3rem;
   border: 0;
   border-radius: var(--rounded-md);
-  background-color: var(--brand-90);
-  color: var(--text-primary);
+  background-color: var(--brand-100);
+  color: var(--bg-card);
   font-size: 1.25rem;
   cursor: pointer;
+
+  &:hover {
+    background-color: var(--brand-70);
+  }
 }
 
 .today-date {
@@ -309,7 +360,7 @@ h1, h2, h3 {
   height: 0.75rem;
   flex: 1;
   display: block;
-  accent-color: var(--brand-70);
+  accent-color: var(--brand-100);
 }
 
 .progress-label,
