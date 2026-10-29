@@ -61,7 +61,7 @@ export default function Signup() {
                 </button>
             </form>
             <div className="auth-footer">
-                No account? 
+                Already have an account? 
                 <Link to="/login">Log in</Link>
             </div>
         </div>
