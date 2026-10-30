@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { signUp } from "aws-amplify/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthCard } from "../components/AuthCard";
+import { AuthInput } from "../components/AuthInput";
+import { AuthFooter } from "../components/AuthFooter";
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -25,34 +28,27 @@ export default function Signup() {
     };
 
     return (
-        <div className="auth-card">
-            <div className="auth-title">
-                <h1>Signup</h1>
-                <p className="subtle-text">Ready to join?</p>
-            </div>
+        <AuthCard
+            title="Signup"
+            subtitle="Ready to join?"
+        >
             <form onSubmit={handleSignup} className="auth-form">
-                <div className="auth-input">
-                    <label className="muted-text" htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        aria-label="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="email"
-                    />
-                </div>
-                <div className="auth-input">
-                    <label className="muted-text" htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        aria-label="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="password"
-                    />
-                </div>
+                <AuthInput
+                    id="email"
+                    label="Email"
+                    inputType="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                />
+                <AuthInput
+                    id="password"
+                    label="Password"
+                    inputType="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="password"
+                />
                 
                 {error && <p className="error-message">{error}</p>}
 
@@ -60,10 +56,11 @@ export default function Signup() {
                     {loading ? "Signing up..." : "Sign up"}
                 </button>
             </form>
-            <div className="auth-footer">
-                Already have an account? 
-                <Link to="/login">Log in</Link>
-            </div>
-        </div>
+            <AuthFooter
+                prompt="Already have an account?"
+                linkText="Log in"
+                to="/login"
+            />
+        </AuthCard>
     );
 }
