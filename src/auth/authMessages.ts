@@ -10,14 +10,14 @@ export const errorMessages: Record<string, string> = {
 };
 
 export const confirmSignUpErrorMessages: Record<string, string> = {
-    CodeMismatchException: "That confirmation code is incorrect. Check it and try again.",
-    ExpiredCodeException: "That confirmation code has expired. Request a new one.",
-    LimitExceededException: "You've reached a verification limit. Please wait before trying again.",
-    NotAuthorizedException: "This account can't be confirmed with this request. Try signing in or request another code.",
-    TooManyRequestsException: "There have been too many requests. Please wait and try again.",
-    UserNotFoundException: "We couldn't confirm that account. Check the email address or sign up again.",
-    EmptyConfirmSignUpCode: "Please provide a confirmation code.",
-    EmptyConfirmSignUpUsername: "Please provide an email.",
+    CodeMismatchException: "Incorrect code. Try again.",
+    ExpiredCodeException: "Code expired. Request a new one.",
+    LimitExceededException: "Limit reached. Try again later.",
+    NotAuthorizedException: "Can't confirm account. Sign in or request a new code.",
+    TooManyRequestsException: "Too many requests. Try again later.",
+    UserNotFoundException: "Account not found. Check the email or sign up.",
+    EmptyConfirmSignUpCode: "Please provide email or confirmation code.",
+    EmptyConfirmSignUpUsername: "Please provide email or confirmation code.",
 };
 
 export const resendSignUpCodeErrorMessages: Record<string, string> = {
