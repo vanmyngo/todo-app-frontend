@@ -17,7 +17,13 @@ export default function Signup() {
         setLoading(true);
         setError("");
         try {
-            await signUp({ username: email, password });
+            await signUp({ 
+                username: email, 
+                password,
+                options: {
+                    userAttributes: { email },
+                }
+            });
             navigate("/confirm-signup");
         } catch (err) {
             console.error("[src/pages/SignupPage.tsx] Failed: " + err);

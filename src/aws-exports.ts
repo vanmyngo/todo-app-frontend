@@ -9,7 +9,6 @@ Amplify.configure({
         email: true,
         username: false,
       },
-      signUpVerificationMethod: "link",
     },
   }
 });
