@@ -1,31 +1,42 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { confirmSignUp } from "@aws-amplify/auth";
-import { confirmSignUpErrorMessages } from "../auth/authMessages";
+import { confirmSignUp, resendSignUpCode } from "@aws-amplify/auth";
+import { confirmSignUpErrorMessages, resendSignUpCodeErrorMessages } from "../auth/authMessages";
 import { AuthCard } from "../components/AuthCard";
 import { AuthInput } from "../components/AuthInput";
 
 export default function ConfirmSignup() {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [resend, setResend] = useState(false);
     const [confirmationCode, setConfirmationCode] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
     async function handleConfirmSignup(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
-        setIsLoading(true);
+        setLoading(true);
 
         try {
             await confirmSignUp({ username: email, confirmationCode });
             navigate("/login");
         } catch (err) {
             const errorName = err instanceof Error ? err.name : "";
-            setError(confirmSignUpErrorMessages[errorName] ?? "Unable to verify. Please check your details and try again.");
+            setError(confirmSignUpErrorMessages[errorName] ?? "Unable to verify.");
         } finally {
-            setIsLoading(false);
+            setLoading(false);
         }
+    }
 
+    async function handleResendConfirmation() {
+        try {
+            await resendSignUpCode({ username: email });
+            setResend(true);
+            window.setTimeout(() => setResend(false), 10_000);
+        } catch (err) {
+            const errorName = err instanceof Error ? err.name : "";
+            setError(resendSignUpCodeErrorMessages[errorName] ?? "Unable to resend confirmation code.");
+        }
     }
 
     return (
@@ -52,8 +63,11 @@ export default function ConfirmSignup() {
 
                 {error && <p className="error-message">{error}</p>}
 
-                <button type="submit">
-                    {isLoading ? "Confirming..." : "Confirm"}
+                <button type="submit" className="auth-card__submit-button" disabled={loading}>
+                    {loading ? "Confirming..." : "Confirm"}
+                </button>
+                <button type="button" className="auth-card__link-button" onClick={handleResendConfirmation} disabled={loading || resend}>
+                    { resend ? "Code sent!" : "Resend Code" }
                 </button>
             </form>
         </AuthCard>

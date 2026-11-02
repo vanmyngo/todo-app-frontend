@@ -1,17 +1,12 @@
 export const nextStepMessages: Record<string, string> = {
     CONFIRM_SIGN_UP: "Please confirm your account before logging in.",
-    CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE: "Complete the required sign-in challenge.",
-    CONTINUE_SIGN_IN_WITH_MFA_SELECTION: "Select a multi-factor authentication method.",
-    CONFIRM_SIGN_IN_WITH_SMS_CODE: "Enter the verification code sent to your phone.",
-    CONFIRM_SIGN_IN_WITH_TOTP_CODE: "Enter the code from your authenticator app.",
-    CONTINUE_SIGN_IN_WITH_TOTP_SETUP: "Set up an authenticator app to continue.",
-    CONTINUE_SIGN_IN_WITH_EMAIL_SETUP: "Set up email authentication to continue.",
     RESET_PASSWORD: "You must reset your password before logging in.",
     CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED: "You must set a new password before logging in.",
 };
 
 export const errorMessages: Record<string, string> = {
     NotAuthorizedException: "Invalid email or password.",
+    UserNotFoundException: "Invalid email or password.",
 };
 
 export const confirmSignUpErrorMessages: Record<string, string> = {
@@ -31,4 +26,15 @@ export const confirmSignUpErrorMessages: Record<string, string> = {
     UnexpectedLambdaException: "Verification is temporarily unavailable. Please try again later.",
     UserLambdaValidationException: "We couldn't verify the account details. Check them and try again.",
     UserNotFoundException: "We couldn't confirm that account. Check the email address or sign up again.",
+    EmptyConfirmSignUpCode: "Please provide a confirmation code.",
+    EmptyConfirmSignUpUsername: "Please provide an email.",
+};
+
+export const resendSignUpCodeErrorMessages: Record<string, string> = {
+  CodeDeliveryFailureException: "Couldn’t send a new code. Please try again.",
+  InvalidParameterException: "Check the email and try again.",
+  LimitExceededException: "Too many requests. Please wait and try again.",
+  TooManyRequestsException: "Too many requests. Please wait and try again.",
+  UserNotFoundException: "Invalid email.",
+  EmptySignUpUsername: "Please provide an email.",
 };
