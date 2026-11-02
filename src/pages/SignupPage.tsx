@@ -58,7 +58,7 @@ export default function Signup() {
                 
                 {error && <p className="error-message">{error}</p>}
 
-                <button type="submit">
+                <button type="submit" className="auth-card__submit-button" disabled={loading}>
                     {loading ? "Signing up..." : "Sign up"}
                 </button>
             </form>

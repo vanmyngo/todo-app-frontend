@@ -26,6 +26,7 @@ export const AuthInput = ({
                 value={value}
                 onChange={onChange}
                 autoComplete={autoComplete}
+                className="auth-input__field"
             />
         </div>
     )

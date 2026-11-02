@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { signIn } from "@aws-amplify/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { errorMessages, nextStepMessages } from "../auth/authMessages";
 import { useAuth } from "../auth/AuthContext";
 import { AuthCard } from "../components/AuthCard";
@@ -14,6 +14,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const { isSignedIn, checking } = useAuth();
+    const [needConfirmation, setNeedConfirmation] = useState(false);
     const navigate = useNavigate();
 
     // Send already signed-in users to the todo page.
@@ -33,6 +34,7 @@ export default function Login() {
         event.preventDefault();
         setLoading(true);
         setError("");
+        setNeedConfirmation(false);
 
         try {
             const result = await signIn({ username: email, password, options: { authFlowType: "USER_SRP_AUTH" } });
@@ -40,6 +42,11 @@ export default function Login() {
                 navigate("/todos");
                 return;
             }
+
+            if (result.nextStep.signInStep === "CONFIRM_SIGN_UP") { 
+                setNeedConfirmation(true); 
+            }
+
             setError(nextStepMessages[result.nextStep.signInStep] ?? "Additional confirmation is required.");
         } catch (err: unknown) {
             const errorName = err instanceof Error ? err.name : "";
@@ -80,13 +87,23 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 
-                {error && <p className="error-message">{error}</p>}
+                {error && (
+                    <p className="error-message">
+                        {error}
+                        {needConfirmation && (
+                            <>
+                                <br />
+                                <Link to="/confirm-signup">Confirm your account</Link>
+                            </>
+                        )}
+                    </p>
+                )}
 
-                <button type="submit">
+                <button type="submit" className="auth-card__submit-button" disabled={loading}>
                     {loading ? "Logging in..." : "Log in"}
                 </button>
             </form>
-            <AuthFooter 
+            <AuthFooter
                 prompt="No account?"
                 linkText="Sign up"
                 to="/signup"
