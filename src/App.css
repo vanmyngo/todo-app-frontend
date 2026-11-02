@@ -38,8 +38,8 @@ h1, h2, h3 {
   }
 
   &:active {
-    background-color: var(--brand-90);
-    color: var(--bg-card);
+    color: var(--brand-70);
+    cursor: pointer;
   }
 }
 
@@ -56,8 +56,8 @@ h1, h2, h3 {
   }
 
   &:active {
-    background-color: var(--brand-90);
-    color: var(--bg-card);
+    color: var(--brand-70);
+    cursor: pointer;
   }
 }
 
@@ -72,6 +72,16 @@ h1, h2, h3 {
   color: var(--danger);
   font-size: 0.8rem;
   margin: 0 0.2rem;
+  gap: 0.2rem;
+}
+
+.error-message a {
+  text-decoration: none;
+  color: var(--brand-70);
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .auth-card {
@@ -82,7 +92,7 @@ h1, h2, h3 {
   width: 350px;
 }
 
-.auth-card input {
+.auth-input__field {
   background-color: var(--bg-input);
   border-radius: 10%;
   border: none;
@@ -96,7 +106,7 @@ h1, h2, h3 {
   }
 }
 
-.auth-card button {
+.auth-card__submit-button {
   background-color: var(--brand-90);
   border: none;
   padding: 0.5rem 0;
@@ -105,6 +115,19 @@ h1, h2, h3 {
 
   &:hover {
     background-color: var(--brand-100);
+    cursor: pointer;
+  }
+}
+
+.auth-card__link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--subtle-text);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -126,7 +149,7 @@ h1, h2, h3 {
   color: var(--text-subtle);
   display: flex;
   justify-content: center;
-  gap: 0.1rem;
+  gap: 0.2rem;
 }
 
 .auth-footer a {

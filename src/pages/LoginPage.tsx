@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { signIn } from "@aws-amplify/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { errorMessages, nextStepMessages } from "../auth/authMessages";
 import { useAuth } from "../auth/AuthContext";
+import { AuthCard } from "../components/AuthCard";
+import { AuthInput } from "../components/AuthInput";
+import { AuthFooter } from "../components/AuthFooter";
 
 export default function Login() {
     // Store form values, status, and any login error.
@@ -11,6 +14,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const { isSignedIn, checking } = useAuth();
+    const [needConfirmation, setNeedConfirmation] = useState(false);
     const navigate = useNavigate();
 
     // Send already signed-in users to the todo page.
@@ -30,6 +34,7 @@ export default function Login() {
         event.preventDefault();
         setLoading(true);
         setError("");
+        setNeedConfirmation(false);
 
         try {
             const result = await signIn({ username: email, password, options: { authFlowType: "USER_SRP_AUTH" } });
@@ -37,6 +42,11 @@ export default function Login() {
                 navigate("/todos");
                 return;
             }
+
+            if (result.nextStep.signInStep === "CONFIRM_SIGN_UP") { 
+                setNeedConfirmation(true); 
+            }
+
             setError(nextStepMessages[result.nextStep.signInStep] ?? "Additional confirmation is required.");
         } catch (err: unknown) {
             const errorName = err instanceof Error ? err.name : "";
@@ -57,41 +67,45 @@ export default function Login() {
 
     // Render the login form after the session check completes.
     return (
-        <div className="auth-card">
-            <div className="auth-title">
-                <h1>Login</h1>
-                <p className="subtle-text">Let's get your day started</p>
-            </div>
+        <AuthCard
+            title="Login"
+            subtitle="Let's get your day started"
+        >
             <form onSubmit={handleLogin} className="auth-form">
-                <div className="auth-input">
-                    <label className="muted-text" htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="auth-input">
-                    <label className="muted-text" htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+                <AuthInput
+                    id="email"
+                    label="Email"
+                    inputType="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <AuthInput
+                    id="password"
+                    label="Password"
+                    inputType="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
                 
-                {error && <p className="error-message">{error}</p>}
+                {error && needConfirmation ? (
+                    <p className="error-message">
+                        Please <Link to="/confirm-signup">confirm your account</Link> before logging in.
+                    </p>
+                ) : (
+                    <p className="error-message">
+                        {error}
+                    </p>
+                )}
 
-                <button type="submit">
+                <button type="submit" className="auth-card__submit-button" disabled={loading}>
                     {loading ? "Logging in..." : "Log in"}
                 </button>
             </form>
-            <div className="auth-footer">
-                Already have an account?
-                <Link to="/signup">Sign up</Link>
-            </div>
-        </div>
+            <AuthFooter
+                prompt="No account?"
+                linkText="Sign up"
+                to="/signup"
+            />
+        </AuthCard>
     );
 }
