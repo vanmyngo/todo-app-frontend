@@ -87,15 +87,13 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 
-                {error && (
+                {error && needConfirmation ? (
+                    <p className="error-message">
+                        Please <Link to="/confirm-signup">confirm your account</Link> before logging in.
+                    </p>
+                ) : (
                     <p className="error-message">
                         {error}
-                        {needConfirmation && (
-                            <>
-                                <br />
-                                <Link to="/confirm-signup">Confirm your account</Link>
-                            </>
-                        )}
                     </p>
                 )}
 
