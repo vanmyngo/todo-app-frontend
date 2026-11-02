@@ -50,7 +50,7 @@ h1, h2, h3 {
   border-radius: var(--rounded-lg);
   color: inherit;
 
-  &:hover{
+  &:hover {
     color: var(--brand-100);
     cursor: pointer;
   }
