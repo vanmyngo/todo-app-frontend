@@ -398,11 +398,17 @@ h1, h2, h3 {
   text-align: right;
   font-weight: bold;
 }
+/* #endregion */
 
+/* #region Responsive styles */
 @media only screen and (max-width: 767px) {
   .todo-grid-container {
     gap: 1rem;
     margin: 1rem auto;
+  }
+
+  .auth-card {
+    width: 70%;
   }
 }
 /* #endregion */
