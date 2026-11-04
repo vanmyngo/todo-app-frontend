@@ -89,7 +89,7 @@ h1, h2, h3 {
   border-radius: 5%;
   padding: 1.5rem;
   margin: 20vh auto;
-  width: 350px;
+  width: min(70vw, 350px);
 }
 
 .auth-input__field {
@@ -404,10 +404,6 @@ h1, h2, h3 {
   .todo-grid-container {
     gap: 1rem;
     margin: 1rem auto;
-  }
-
-  .auth-card {
-    width: 70%;
   }
 }
 /* #endregion */
