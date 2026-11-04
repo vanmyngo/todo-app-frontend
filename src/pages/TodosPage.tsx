@@ -13,8 +13,8 @@ export default function TodosPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState("all");
-  const [completedWithin, setCompletedWithin] = useState("7");
-  const [createdWithin, setCreatedWithin] = useState("7");
+  const [completedWithin, setCompletedWithin] = useState("1");
+  const [createdWithin, setCreatedWithin] = useState("1");
   
   useEffect(() => {
     async function fetchTodos() {

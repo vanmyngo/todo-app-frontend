@@ -89,7 +89,7 @@ h1, h2, h3 {
   border-radius: 5%;
   padding: 1.5rem;
   margin: 20vh auto;
-  width: 350px;
+  width: min(70vw, 350px);
 }
 
 .auth-input__field {
@@ -187,7 +187,7 @@ h1, h2, h3 {
 .todo-page-header {
   grid-area: header;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
   gap: 2rem;
 }
@@ -223,7 +223,6 @@ h1, h2, h3 {
   width: 100%;
   min-width: 0;
   margin: 1rem 0;
-  padding: 0 0 0.35rem;
   box-sizing: border-box;
   text-align: center;
   background-color: inherit;
@@ -394,25 +393,17 @@ h1, h2, h3 {
 }
 
 .progress-percentage {
-  min-width: 2.5rem;
+  min-width: 1rem;
   text-align: right;
   font-weight: bold;
 }
+/* #endregion */
 
-@media (max-width: 56rem) {
+/* #region Responsive styles */
+@media only screen and (max-width: 767px) {
   .todo-grid-container {
     gap: 1rem;
     margin: 1rem auto;
-  }
-}
-
-@media (max-width: 42rem) {
-  .todo-page-header {
-    gap: 0.75rem;
-  }
-
-  #progress-tracker-container {
-    max-width: 24rem;
   }
 }
 /* #endregion */
